@@ -7,8 +7,12 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class MyViewModel : ViewModel(){
- //private val _toggleStateOfInputVoice= MutableLiveData<Boolean>()
-  var toggleStateOfInputVoice= MutableLiveData<Boolean>()
-  //get()=_toggleStateOfInputVoice
+
+  private val _toggleStateOfInputVoice= MutableLiveData<Boolean>(false)
+ val toggleStateOfInputVoice: LiveData<Boolean> = _toggleStateOfInputVoice
+
+ fun setToggle(isOn: Boolean) {
+  _toggleStateOfInputVoice.value = isOn
+ }
 
 }

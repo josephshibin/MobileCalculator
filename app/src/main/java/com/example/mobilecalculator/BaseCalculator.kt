@@ -2,6 +2,7 @@ package com.example.mobilecalculator
 
 import android.os.Bundle
 import android.view.*
+import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -12,6 +13,7 @@ import com.example.mobilecalculator.viewmodel.MyViewModel
 
 class BaseCalculator : Fragment() {
     private lateinit var myViewModel: MyViewModel
+    private lateinit var button: Button
 
 
     // voice input
@@ -60,21 +62,33 @@ class BaseCalculator : Fragment() {
         binding.buttonEquals.setOnClickListener { onEqual(view) }
 
         myViewModel = ViewModelProvider(this@BaseCalculator).get(MyViewModel::class.java)
+        button=binding.micBtn
 
 
-         myViewModel.toggleStateOfInputVoice.observe(viewLifecycleOwner) {isToggleButtonOn ->
-            if (isToggleButtonOn) {
-
-
-                binding.micBtn.visibility = View.VISIBLE
-            } else {
-
-                binding.micBtn.visibility = View.GONE
-            }
-        }
+//         myViewModel.toggleStateOfInputVoice.observe(viewLifecycleOwner) {isToggleButtonOn ->
+//            if (isToggleButtonOn) {
+//
+//
+//                binding.micBtn.visibility = View.VISIBLE
+//            } else {
+//
+//                binding.micBtn.visibility = View.GONE
+//            }
+//        }
 
         setHasOptionsMenu(true)
         return view
+    }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        myViewModel.toggleStateOfInputVoice.observe(viewLifecycleOwner) { isOn ->
+            if (isOn) {
+              binding.micBtn.visibility = View.VISIBLE
+            } else {
+                binding.micBtn.visibility = View.INVISIBLE
+            }
+        }
     }
 
 

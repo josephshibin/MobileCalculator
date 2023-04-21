@@ -31,10 +31,10 @@ class VoiceAssistance : Fragment() {
         }
 
         binding.switch3.setOnCheckedChangeListener { buttonView, isChecked ->
-            if(isChecked){
-                myViewModel.toggleStateOfInputVoice.value =isChecked
+           // if(isChecked){
+                myViewModel.setToggle(isChecked)
 
-            }
+            //}
         }
         return view
 
